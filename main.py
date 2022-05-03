@@ -51,7 +51,8 @@ def postHandler():
 		return respond("Successfully obtained keywords.", keywords)
 	except Exception as e:
 		response.status = 400
-		return respond("Error obtaining keywords", e)
+		print("here:", e)
+		return respond("Error obtaining keywords", str(e))
 
 
 def extract(content, language, limit):

@@ -1,0 +1,7 @@
+.github/**/*
+.github/
+testdata/**/*
+testdata/
+LICENSE
+NOTES.md
+README.md

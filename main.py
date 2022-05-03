@@ -21,7 +21,7 @@ class Response:
 
 @app.get("/")
 def pingHandler():
-	return "Hello World!"
+	return respond("PONG", None)
 
 
 @app.post("/")

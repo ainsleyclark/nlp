@@ -25,4 +25,5 @@ RUN python -m spacy download sv_core_news_sm  # Swedish
 
 EXPOSE 8080
 
-CMD ["python3", "main.py"]
+ENTRYPOINT ["python"]
+CMD ["main.py"]

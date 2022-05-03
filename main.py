@@ -1,11 +1,12 @@
 import os
 
 from bottle import Bottle, request, response, abort
-from stopwords import stopwords
+from stopwords import stopwords, dirty
 from dataclasses import dataclass
 
 import pke
 import json
+import re
 
 app = Bottle()
 
@@ -49,21 +50,39 @@ def postHandler():
 		return respond("Error: Text in body cannot be empty", None)
 
 	try:
-		keywords = extract(content, lang, limit)
-		return respond("Successfully obtained keywords.", keywords)
+		keywords = extract(content, lang)
+		return respond("Successfully obtained keywords.", process(keywords, limit))
 	except Exception as e:
 		response.status = 400
 		print("here:", e)
 		return respond("Error obtaining keywords", str(e))
 
 
-def extract(content, language, limit):
+def extract(content, language):
 	extractor = pke.unsupervised.TfIdf()  # initialize a keyphrase extraction model, here TFxIDF
 	extractor.stoplist = stopwords
 	extractor.load_document(input=content, language=language)  # load the content of the document  (str or spacy Doc)
 	extractor.candidate_selection()  # identify keyphrase candidates
 	extractor.candidate_weighting()  # weight keyphrase candidates
-	return extractor.get_n_best(n=limit)  # select the 10-best candidates as keyphrases
+	return extractor.get_n_best(1000)  # select the 10-best candidates as keyphrases
+
+
+def process(keywords, limit):
+	list = []
+	for keyword in keywords:
+		ok = True
+		match = re.match(r'.*([1-3][0-9]{3})', keyword[0])
+		if match is not None:
+			continue
+		for word in dirty:
+			if word in keyword[0]:
+				ok = False
+
+		if ok is False:
+			continue
+
+		list.append({"term": keyword[0], "salience": keyword[1]})
+	return list[:limit]
 
 
 def respond(message, data):

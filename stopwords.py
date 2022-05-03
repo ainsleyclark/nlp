@@ -186,3 +186,8 @@ stopwords = [
 	".",
 	"@",
 ]
+
+dirty = [
+	"apr"
+]
+

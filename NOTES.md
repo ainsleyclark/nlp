@@ -40,3 +40,5 @@ langcodes = {
        "sw": "swedish",
        "ja": "japanese"
 }
+
+ --platform linux/amd64

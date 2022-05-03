@@ -1,3 +1,5 @@
+import os
+
 from bottle import Bottle, request, response, abort
 from stopwords import stopwords
 from dataclasses import dataclass
@@ -72,4 +74,8 @@ def respond(message, data):
 	return json.dumps(Response(status, message, error, data), default=vars)
 
 
-app.run(host='localhost', port=8080, debug=True)
+port = 8080
+if os.getenv("PORT"):
+	port = os.getenv("PORT")
+
+app.run(host='localhost', port=port, debug=True)

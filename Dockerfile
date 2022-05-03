@@ -5,8 +5,7 @@ WORKDIR /app
 COPY . .
 
 # Install Deps
-RUN pip install bottle
-RUN pip install git+https://github.com/boudinfl/pke.git
+RUN pip install -r requirements.txt
 
 # Install Languages
 RUN python -m spacy download da_core_news_sm  # Danish

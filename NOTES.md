@@ -21,6 +21,8 @@ python -m spacy download es_core_news_sm	# Spanish
 python -m spacy download sv_core_news_sm  # Swedish
 ```
 
+https://stackoverflow.com/questions/29663459/python-app-does-not-print-anything-when-running-detached-in-docker
+https://stackoverflow.com/questions/45884932/cant-manage-to-build-and-run-a-bottle-py-app
 
 langcodes = {
        "ar": "arabic",

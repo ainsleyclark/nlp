@@ -97,4 +97,4 @@ port = 8080
 if os.getenv("PORT"):
 	port = os.getenv("PORT")
 
-app.run(host='localhost', port=port, debug=True)
+app.run(host='0.0.0.0', port=port, debug=True)

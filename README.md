@@ -137,6 +137,27 @@ Stopwords are specific words to exclude from the analysis.
 Dirty words will be compared by a substring to see if the keyword contains the word passed, if it does it will be
 excluded from the analysis.
 
+## Implemented Models
+
+This library currently implements the following keyphrase extraction models:
+
+* Unsupervised models
+  * Statistical models
+    * FirstPhrases
+    * TfIdf
+    * KPMiner [(El-Beltagy and Rafea, 2010)](http://www.aclweb.org/anthology/S10-1041.pdf)
+    * YAKE [(Campos et al., 2020)](https://doi.org/10.1016/j.ins.2019.09.013)
+  * Graph-based models
+    * TextRank [(Mihalcea and Tarau, 2004)](http://www.aclweb.org/anthology/W04-3252.pdf)
+    * SingleRank  [(Wan and Xiao, 2008)](http://www.aclweb.org/anthology/C08-1122.pdf)
+    * TopicRank [(Bougouin et al., 2013)](http://aclweb.org/anthology/I13-1062.pdf)
+    * TopicalPageRank [(Sterckx et al., 2015)](http://users.intec.ugent.be/cdvelder/papers/2015/sterckx2015wwwb.pdf)
+    * PositionRank [(Florescu and Caragea, 2017)](http://www.aclweb.org/anthology/P17-1102.pdf)
+    * MultipartiteRank [(Boudin, 2018)](https://arxiv.org/abs/1803.08721)
+* Supervised models
+  * Feature-based models
+    * Kea [(Witten et al., 2005)](https://www.cs.waikato.ac.nz/ml/publications/2005/chap_Witten-et-al_Windows.pdf)
+
 ## Development
 
 To get started with local development for the project, please see the following steps below.
@@ -169,27 +190,6 @@ A dockerfile is included in this project, so you can run the API locally.
 docker build . nlp
 docker run -it -p 8080:8080 nlp
 ```
-
-## Implemented Models
-
-This library currently implements the following keyphrase extraction models:
-
-* Unsupervised models
-	* Statistical models
-		* FirstPhrases
-		* TfIdf
-		* KPMiner [(El-Beltagy and Rafea, 2010)](http://www.aclweb.org/anthology/S10-1041.pdf)
-		* YAKE [(Campos et al., 2020)](https://doi.org/10.1016/j.ins.2019.09.013)
-	* Graph-based models
-		* TextRank [(Mihalcea and Tarau, 2004)](http://www.aclweb.org/anthology/W04-3252.pdf)
-		* SingleRank  [(Wan and Xiao, 2008)](http://www.aclweb.org/anthology/C08-1122.pdf)
-		* TopicRank [(Bougouin et al., 2013)](http://aclweb.org/anthology/I13-1062.pdf)
-		* TopicalPageRank [(Sterckx et al., 2015)](http://users.intec.ugent.be/cdvelder/papers/2015/sterckx2015wwwb.pdf)
-		* PositionRank [(Florescu and Caragea, 2017)](http://www.aclweb.org/anthology/P17-1102.pdf)
-		* MultipartiteRank [(Boudin, 2018)](https://arxiv.org/abs/1803.08721)
-* Supervised models
-	* Feature-based models
-		* Kea [(Witten et al., 2005)](https://www.cs.waikato.ac.nz/ml/publications/2005/chap_Witten-et-al_Windows.pdf)
 
 
 

@@ -115,66 +115,6 @@ of objects is returned on successful submission which details the keyword and sa
 		{
 			"term": "team",
 			"salience": 16.725550003417045
-		},
-		{
-			"term": "industries",
-			"salience": 16.365092472032078
-		},
-		{
-			"term": "awards",
-			"salience": 16.03993635429049
-		},
-		{
-			"term": "touch",
-			"salience": 15.539727270044803
-		},
-		{
-			"term": "seo seo",
-			"salience": 14.359818180029869
-		},
-		{
-			"term": "seo talent",
-			"salience": 14.359818180029869
-		},
-		{
-			"term": "seo talent combined",
-			"salience": 14.359818180029869
-		},
-		{
-			"term": "talent combined",
-			"salience": 14.359818180029869
-		},
-		{
-			"term": "seo services",
-			"salience": 14.359818180029869
-		},
-		{
-			"term": "technology seo",
-			"salience": 14.359818180029869
-		},
-		{
-			"term": "technology seo technology",
-			"salience": 14.359818180029869
-		},
-		{
-			"term": "seo technology",
-			"salience": 14.359818180029869
-		},
-		{
-			"term": "serp speed",
-			"salience": 14.359818180029869
-		},
-		{
-			"term": "direct line",
-			"salience": 14.359818180029869
-		},
-		{
-			"term": "latest reddico",
-			"salience": 14.359818180029869
-		},
-		{
-			"term": "latest reddico news",
-			"salience": 14.359818180029869
 		}
 	]
 }

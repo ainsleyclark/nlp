@@ -11,8 +11,7 @@ This library ships with supervised models trained on the [SemEval-2010 dataset](
 
 - Main production API URL sits at `https://nlp-vqyb5tu4fq-ew.a.run.app` **Note** - This will likely change.
 - The base URL of the application is `/api/v1` and must be prepended to every request.
-- A token must be passed for request to this application, it must be set as a header with the key of `X-Auth-Token` with
-	a value of `vPz5LVNvYMLruAgy6BCMxM9F8FZYDpq6Bk3N`
+- A token must be passed for request to this application, it must be set as a header with the key of `X-Auth-Token`.
 
 ## Endpoints
 
@@ -182,6 +181,8 @@ of objects is returned on successful submission which details the keyword and sa
 ```
 
 ## Stopwords
+
+##
 
 ## Implemented Models
 

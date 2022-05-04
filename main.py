@@ -11,7 +11,7 @@ app = Bottle()
 
 DEFAULT_LIMIT = 30
 DEFAULT_LANGUAGE = "en"
-TOKEN = "vPz5LVNvYMLruAgy6BCMxM9F8FZYDpq6Bk3N"
+TOKEN = os.getenv("NLP_TOKEN")
 
 
 @dataclass

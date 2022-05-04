@@ -133,7 +133,7 @@ dmypy.json
 .idea/*
 
 # Sensitive Info
-credentials.md
+CREDENTIALS.md
 
 # System Files
 .DS_Store

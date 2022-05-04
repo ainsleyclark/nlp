@@ -16,6 +16,7 @@ debug = True
 if ENV == "production" or ENV == "prod":
 	debug = False
 
+
 @dataclass
 class Response:
 	status: int
@@ -75,6 +76,18 @@ def postHandler():
 		return respond("Error obtaining keywords", str(e))
 
 
+@app.error(404)
+def error404(e):
+	response.headers['Content-Type'] = 'application/json'
+	return respond("404 endpoint not found", str(e))
+
+
+@app.error(500)
+def error500(e):
+	response.headers['Content-Type'] = 'application/json'
+	return respond("Internal server error", str(e))
+
+
 def extract(content, language, stopwords):
 	extractor = pke.unsupervised.TfIdf()  # initialize a keyphrase extraction model, here TFxIDF
 	extractor.stoplist = stopwords
@@ -127,6 +140,5 @@ def respond(message, data):
 port = 8080
 if os.getenv("PORT"):
 	port = os.getenv("PORT")
-
 
 app.run(host='0.0.0.0', port=port, debug=debug)

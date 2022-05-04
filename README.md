@@ -122,6 +122,26 @@ of objects is returned on successful submission which details the keyword and sa
 }
 ```
 
+## Languages
+
+The available languages and keys for the library is listed below.
+
+```json
+ "da": "danish"
+ "du": "dutch"
+ "en": "english"
+ "fi": "finnish"
+ "fr": "french"
+ "ge": "german"
+ "it": "italian"
+ "no": "norwegian"
+ "po": "portuguese"
+ "ro": "romanian"
+ "ru": "russian"
+ "sp": "spanish"
+ "sw": "swedish"
+```
+
 ## Excluding Words
 
 To exclude words from the extraction you can either pass `stopwords` or `dirty` in the JSON body of the request, the

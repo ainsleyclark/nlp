@@ -137,6 +137,39 @@ Stopwords are specific words to exclude from the analysis.
 Dirty words will be compared by a substring to see if the keyword contains the word passed, if it does it will be
 excluded from the analysis.
 
+## Development
+
+To get started with local development for the project, please see the following steps below.
+
+### Setup
+
+This library relies on relies on `spacy` (>= 3.2.3) for text processing and
+requires [models](https://spacy.io/usage/models) to be installed. To set up the dependencies of the project, run the
+following setup script.
+
+```bash
+sudo chmod -R 777 ./bin
+./bin/start.sh
+```
+
+### Token
+
+Export the environment variable `NLP_TOKEN` to set an authorisation token to be used for the API. Subsequent requests
+should use `X-Auth-Token` with the value of the exported token.
+
+```bash
+export NLP_TOKEN=mytoken
+```
+
+### Docker
+
+A dockerfile is included in this project, so you can run the API locally.
+
+```bash
+docker build . nlp
+docker run -it -p 8080:8080 nlp
+```
+
 ## Implemented Models
 
 This library currently implements the following keyphrase extraction models:

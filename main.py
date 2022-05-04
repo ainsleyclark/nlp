@@ -1,17 +1,17 @@
-import os
-
-from bottle import Bottle, request, response, abort
+from bottle import Bottle, request, response
 from stopwords import stopwords, dirty
 from dataclasses import dataclass
 
 import pke
 import json
 import re
+import os
 
 app = Bottle()
 
 DEFAULT_LIMIT = 30
 DEFAULT_LANGUAGE = "en"
+TOKEN = "vPz5LVNvYMLruAgy6BCMxM9F8FZYDpq6Bk3N"
 
 
 @dataclass
@@ -22,13 +22,20 @@ class Response:
 	data: any
 
 
-@app.get("/")
+@app.get("/api/v1")
 def pingHandler():
+	response.headers['Content-Type'] = 'application/json'
 	return respond("PONG", None)
 
 
-@app.post("/")
+@app.post("/api/v1")
 def postHandler():
+	print(request.headers.get("X-Auth-Token"))
+
+	if request.headers.get("X-Auth-Token") != TOKEN:
+		response.status = 401
+		return respond("Error: Unauthorised token", None)
+
 	response.headers['Content-Type'] = 'application/json'
 
 	body = request.json

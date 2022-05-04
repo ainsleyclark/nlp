@@ -42,11 +42,13 @@ Heartbeat endpoint that doesn't require any authorisation.
 This endpoint extracts keywords from a given piece of text. The JSON body for the endpoint is described below. A slice
 of objects is returned on successful submission which details the keyword and salience score.
 
-| Key      | Example Value | Default Value | Required | Notes                                    |
-|----------|:--------------|:--------------|:---------|:-----------------------------------------|
-| language | en            | en            | ✅        | See below for available language keys    |
-| limit    | 10            | 30            | ✅        | The amount of keywords to extract.       |
-| text     | My keywords   | N/A           | ❌        | The content to extract the keywords from |
+| Key       | Example Value   | Default Value | Required | Notes                                     |
+|-----------|:----------------|:--------------|:---------|:------------------------------------------|
+| language  | `"en"`          | en            | ✅        | See below for available language keys     |
+| limit     | `10`            | 30            | ✅        | The amount of keywords to extract.        |
+| text      | `"My keywords"` | N/A           | ❌        | The content to extract the keywords from  |
+| stopwords | `["exclude"]`   | N/A           | ❌        | Specific words to exclude                 |
+| dirty     | `["exclude"]`   | N/A           | ❌        | Words that contain a substring to exclude |
 
 **Example response:**
 
@@ -120,9 +122,20 @@ of objects is returned on successful submission which details the keyword and sa
 }
 ```
 
-## Stopwords
+## Excluding Words
 
-##
+To exclude words from the extraction you can either pass `stopwords` or `dirty` in the JSON body of the request, the
+difference is explained below. If you notice a pattern with a word regularly occurring, please add the word
+to `./exclude/stopwords.json` or `./exclude/dirty.json` and make a pull request.
+
+### Stopwords
+
+Stopwords are specific words to exclude from the analysis.
+
+### Dirty
+
+Dirty words will be compared by a substring to see if the keyword contains the word passed, if it does it will be
+excluded from the analysis.
 
 ## Implemented Models
 

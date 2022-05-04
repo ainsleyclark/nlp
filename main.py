@@ -1,5 +1,4 @@
 from bottle import Bottle, request, response
-from stopwords import stopwords, dirty
 from dataclasses import dataclass
 
 import pke
@@ -12,7 +11,10 @@ app = Bottle()
 DEFAULT_LIMIT = 30
 DEFAULT_LANGUAGE = "en"
 TOKEN = os.getenv("NLP_TOKEN")
-
+ENV = os.getenv("NLP_ENV")
+debug = True
+if ENV == "production" or ENV == "prod":
+	debug = False
 
 @dataclass
 class Response:
@@ -30,8 +32,6 @@ def pingHandler():
 
 @app.post("/api/v1")
 def postHandler():
-	print(request.headers.get("X-Auth-Token"))
-
 	if request.headers.get("X-Auth-Token") != TOKEN:
 		response.status = 401
 		return respond("Error: Unauthorised token", None)
@@ -43,6 +43,8 @@ def postHandler():
 	limit = DEFAULT_LIMIT
 	lang = DEFAULT_LANGUAGE
 	content = ""
+	stopwords = loadStopwords()
+	dirty = loadDirty()
 
 	if "limit" in body:
 		limit = body["limit"]
@@ -57,15 +59,23 @@ def postHandler():
 		return respond("Error: Text in body cannot be empty", None)
 
 	try:
-		keywords = extract(content, lang)
-		return respond("Successfully obtained keywords.", process(keywords, limit))
+		if "stopwords" in body:
+			stopwords = stopwords + body["stopwords"]
+		if "dirty" in body:
+			dirty = dirty + body["dirty"]
 	except Exception as e:
 		response.status = 400
-		print("here:", e)
+		return respond("Error merging stopwords", str(e))
+
+	try:
+		keywords = extract(content, lang, stopwords)
+		return respond("Successfully obtained keywords.", process(keywords, limit, dirty))
+	except Exception as e:
+		response.status = 400
 		return respond("Error obtaining keywords", str(e))
 
 
-def extract(content, language):
+def extract(content, language, stopwords):
 	extractor = pke.unsupervised.TfIdf()  # initialize a keyphrase extraction model, here TFxIDF
 	extractor.stoplist = stopwords
 	extractor.load_document(input=content, language=language)  # load the content of the document  (str or spacy Doc)
@@ -74,7 +84,7 @@ def extract(content, language):
 	return extractor.get_n_best(1000)  # select the 10-best candidates as keyphrases
 
 
-def process(keywords, limit):
+def process(keywords, limit, dirty):
 	list = []
 	for keyword in keywords:
 		ok = True
@@ -92,6 +102,20 @@ def process(keywords, limit):
 	return list[:limit]
 
 
+def loadStopwords():
+	f = open('./exclude/stopwords.json')
+	data = json.load(f)
+	f.close()
+	return data
+
+
+def loadDirty():
+	f = open('./exclude/dirty.json')
+	data = json.load(f)
+	f.close()
+	return data
+
+
 def respond(message, data):
 	status = response.status_code
 	error = False
@@ -104,4 +128,5 @@ port = 8080
 if os.getenv("PORT"):
 	port = os.getenv("PORT")
 
-app.run(host='0.0.0.0', port=port, debug=True)
+
+app.run(host='0.0.0.0', port=port, debug=debug)

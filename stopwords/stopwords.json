@@ -1,4 +1,4 @@
-stopwords = [
+[
 	"a",
 	"about",
 	"above",
@@ -184,10 +184,5 @@ stopwords = [
 	"yourself",
 	"yourselves",
 	".",
-	"@",
+	"@"
 ]
-
-dirty = [
-	"apr"
-]
-
